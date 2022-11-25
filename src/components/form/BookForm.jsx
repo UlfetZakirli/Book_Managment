@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid"
 
 const BookForm = ({ book, handleSubmit }) => {
     const [bookState, setBookState] = useState({
@@ -7,14 +7,7 @@ const BookForm = ({ book, handleSubmit }) => {
         author: book ? book.author : '',
         price: book ? book.price : ''
     })
-
-    const handleChange = (e) => {
-        setBookState({
-            ...bookState, [e.target.name]: e.target.value
-        })
-
-    }
-
+    console.log(bookState);
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -23,11 +16,16 @@ const BookForm = ({ book, handleSubmit }) => {
             id: uuidv4(),
             date: new Date()
         })
+        setBookState({ name: '', author: '', price: '' })
+
+    }
+
+    const handleChange = (e) => {
         setBookState({
-            name: '',
-            author: '',
-            price: ''
+            ...bookState,
+            [e.target.name]: e.target.value
         })
+
     }
 
     const renderInputField = (label, placeholder, name) => (
@@ -37,14 +35,13 @@ const BookForm = ({ book, handleSubmit }) => {
         </div>
     )
 
-    const disabledSubmit = !bookState.name || !bookState.author || !bookState.price
-
+    const handleDisabled = bookState.name && bookState.author && bookState.price
     return (
         <form className='form' onSubmit={onSubmit}>
-            {renderInputField("Book Name", 'Enter name of book', 'name')}
-            {renderInputField("Book Author", 'Enter name of author', 'author')}
-            {renderInputField("Book Price", 'Enter price of book', 'price')}
-            <button type='submit' className='btnForm' disabled={disabledSubmit}>{book ? "Update" : 'Submit'}</button>
+            {renderInputField('Book Name', 'Enter a book...', 'name')}
+            {renderInputField('Author Name', 'Enter an author...', 'author')}
+            {renderInputField('Book Price', 'Enter price of book...', 'price')}
+            <button className='btnForm' type='submit' disabled={!handleDisabled}>{book ? "Update" : 'Submit'}</button>
         </form>
     )
 }

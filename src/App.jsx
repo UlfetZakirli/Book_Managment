@@ -1,7 +1,7 @@
-import Header from './components/Header';
+import Header from './components/Header'
 import './App.css'
-import { Route, Routes } from 'react-router-dom';
-import AddBook from './components/AddBook';
+import { Route, Routes } from 'react-router-dom'
+import AddBook from './components/AddBook'
 import ListBook from './components/ListBook';
 import BookProvider from './context/BookContext';
 import EditBook from './components/EditBook';
@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<ListBook />} />
           <Route path='/add' element={<AddBook />} />
-          <Route path='/edit/:id' element={<EditBook/>}/>
+          <Route path='/edit/:id' element={<EditBook />} />
         </Routes>
       </BookProvider>
     </div>
